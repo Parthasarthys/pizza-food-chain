@@ -1,0 +1,85 @@
+/* Update card container */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 40px; /* Add margin to separate from the nav */
+}
+
+/* Adjust card width for 3 cards per row */
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 100;
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 20px; /* Add margin between cards */
+}
+
+/* Style for navigation */
+.nav {
+    margin-bottom: 20px; /* Add space below the navigation */
+}
+
+/* Home.css */
+/* Home.css */
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Hide overflow for sliding effect */
+    position: relative;
+    margin-top: 120px;
+    margin-bottom: 20px;
+    margin-left: 500px;
+}
+
+.carousel-content {
+    display: flex;
+    transition: transform 0.5s ease; /* Transition for sliding animation */
+}
+
+.carousel-prev,
+.carousel-next {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.carousel-prev {
+    margin-right: 10px;
+}
+
+.carousel-next {
+    margin-left: 10px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    color: #555;
+}
+
+.carousel-container img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+
+.card-button{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+/* Add styles to adjust carousel appearance */
+
+
+/* Add styles to adjust carousel appearance */
+

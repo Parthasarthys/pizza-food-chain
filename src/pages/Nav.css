@@ -1,0 +1,105 @@
+/* Navbar */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color:gray;
+    transition: background-color 0.4s ease-in-out;
+    z-index: 100;
+  }
+  
+  /* Logo */
+  .nav_logo {
+    object-fit: contain;
+    width: 100px; /* Adjust the width as needed */
+    margin-left: 20px;
+  }
+  .menu-link {
+    background: none;
+    border: none;
+    color: rgb(122, 76, 76);
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 25px;
+    padding: 5px 10px;
+    margin-right: 900px;
+  }
+  /* Logout Button */
+  .logout-button {
+    background: none;
+    border: none;
+    color: rgb(122, 76, 76);
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+    margin-left: 20px;
+  }
+  
+  /* Change background color when scrolled */
+  .nav_black {
+    background-color: #111;
+  }
+  
+  .nav_link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 25px;
+    cursor: pointer;
+  }
+  /* Nav.css */
+
+/* Existing styles for navigation */
+
+  
+  /* Media query for screens with a maximum width of 768px */
+  @media (max-width: 768px) {
+    .nav {
+        padding: 10px;
+    }
+  
+    .nav_logo {
+        width: 80px;
+        margin-left: 10px;
+    }
+  
+    .logout-button {
+        font-size: 14px;
+        padding: 3px 8px;
+        margin-left: 10px;
+    }
+  
+    .nav_link {
+        margin-right: 15px;
+    }
+  }
+  
+  /* Media query for screens with a maximum width of 480px */
+  @media (max-width: 480px) {
+    .nav {
+        padding: 5px;
+    }
+  
+    .nav_logo {
+        width: 60px;
+        margin-left: 5px;
+    }
+  
+    .logout-button {
+        font-size: 12px;
+        padding: 2px 6px;
+        margin-left: 5px;
+    }
+  
+    .nav_link {
+        margin-right: 10px;
+        font-size: 12px;
+    }
+  }
+  

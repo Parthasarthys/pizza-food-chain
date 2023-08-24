@@ -1,0 +1,42 @@
+/* Update card container */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 40px; /* Add margin to separate from the nav */
+}
+
+/* Adjust card width for 3 cards per row */
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+    text-align: center;
+    box-sizing: border-box;
+    margin-bottom: 20px; /* Add margin between cards */
+}
+
+.card-button{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+/* Style for navigation */
+.nav {
+    margin-bottom: 20px; /* Add space below the navigation */
+}
+
+/* Home.css */
+/* Home.css */
+
+/* Add styles to adjust carousel appearance */
+
+
+/* Add styles to adjust carousel appearance */
+

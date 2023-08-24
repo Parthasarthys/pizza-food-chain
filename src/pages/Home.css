@@ -1,85 +1,66 @@
-/* Update card container */
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px;
-    margin-top: 40px; /* Add margin to separate from the nav */
+/* Home Page CSS */
+.home-container {
+   margin-bottom: 20px;
 }
 
-/* Adjust card width for 3 cards per row */
-.card {
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 100;
-    text-align: center;
-    box-sizing: border-box;
-    margin-bottom: 20px; /* Add margin between cards */
-}
-
-/* Style for navigation */
-.nav {
-    margin-bottom: 20px; /* Add space below the navigation */
-}
-
-/* Home.css */
-/* Home.css */
-
-.carousel-container {
+.image-section {
     display: flex;
     align-items: center;
-    overflow: hidden; /* Hide overflow for sliding effect */
-    position: relative;
-    margin-top: 120px;
-    margin-bottom: 20px;
-    margin-left: 500px;
+    justify-content: center;
+    padding: 40px 0;
+    margin-top: 80px;
+    max-width: 2000px;
+    
 }
 
-.carousel-content {
-    display: flex;
-    transition: transform 0.5s ease; /* Transition for sliding animation */
-}
-
-.carousel-prev,
-.carousel-next {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    padding: 10px;
-}
-
-.carousel-prev {
-    margin-right: 10px;
-}
-
-.carousel-next {
-    margin-left: 10px;
-}
-
-.carousel-prev:hover,
-.carousel-next:hover {
-    color: #555;
-}
-
-.carousel-container img {
+.image-section img {
     max-width: 100%;
     height: auto;
-    border: 1px solid #ccc;
 }
 
-.card-button{
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
+.image-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.image-info h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.image-info p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.explore-button {
     background-color: #007bff;
     color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
-/* Add styles to adjust carousel appearance */
 
+.explore-button:hover {
+    background-color: #0056b3;
+}
 
-/* Add styles to adjust carousel appearance */
+.manual-content {
+    padding: 40px 0;
+}
 
+.manual-content h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.manual-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* ... (other CSS rules for your Nav and Footer components) ... */

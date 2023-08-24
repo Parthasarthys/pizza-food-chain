@@ -46,7 +46,7 @@ const Sideorders = () => {
                     <div key={item.id} className="card">
                         <img src={item.thumbnailUrl} alt={item.title} />
                         <h3>{item.title}</h3>
-                        <button className="card-button">Order Now</button>
+                        <button className="card-button">Add to Cart</button>
                     </div>
                 ))}
             </div>

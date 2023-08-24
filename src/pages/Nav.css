@@ -1,17 +1,21 @@
-/* Navbar */
+/* Nav.css */
+
 .nav {
+    background-color: black;
+    transition: background-color 0.5s ease-in;
+    /* Decrease the height and padding to make the navbar smaller */
+    height: 50px; /* Adjust the height as needed */
+    padding: 10px 20px; /* Adjust the padding as needed */
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
+    z-index: 100;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-    background-color:gray;
-    transition: background-color 0.4s ease-in-out;
-    z-index: 100;
+    align-items: center;
   }
+  
+  /* Other styles for the navbar */
   
   /* Logo */
   .nav_logo {
@@ -19,15 +23,15 @@
     width: 100px; /* Adjust the width as needed */
     margin-left: 20px;
   }
-  .menu-link {
+  .menu-button {
     background: none;
     border: none;
     color: rgb(122, 76, 76);
     background-color: transparent;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 15px;
     padding: 5px 10px;
-    margin-right: 900px;
+    margin-right: 1000px;
   }
   /* Logout Button */
   .logout-button {
@@ -38,7 +42,7 @@
     cursor: pointer;
     font-size: 16px;
     padding: 5px 10px;
-    margin-left: 20px;
+    margin-right: 80px;
   }
   
   /* Change background color when scrolled */

@@ -14,7 +14,7 @@
 }
 
 .image-section img {
-    max-width: 100%;
+    max-width: 600%;
     height: auto;
 }
 
@@ -62,5 +62,7 @@
     line-height: 1.6;
     margin-bottom: 20px;
 }
-
+ .carousel {
+    margin-top: 60px;
+ }
 /* ... (other CSS rules for your Nav and Footer components) ... */

@@ -40,6 +40,8 @@ const Beverages = () => {
         <div className="home-container">
             <Nav className="nav" />
             <br/>
+            <br/>
+            <br/>
             <h2>Beverage</h2>
             <div className="card-container">
                 {apiData.map(item => (

@@ -1,66 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Footer from './Footer';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Nav from './Nav';
-import CustomizationPopup from './CustomizationPopup'; // Make sure to import the CustomizationPopup component
-import './Pizza.css';
+import Footer from './Footer';
 
 const Pizza = () => {
-    const navigate = useNavigate();
-    const [apiData, setApiData] = useState([]);
-    const [showCustomPopup, setShowCustomPopup] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [cartItems, setCartItems] = useState([]);
+    const { location, category } = useParams();
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
-        // Fetch data from the API
-        fetch('https://jsonplaceholder.typicode.com/photos?_limit=6')
+        // Fetch items of the specified category and location
+        fetch(`https://curly-pumas-type.loca.lt/customer/menu/by-category?location=${location}&category=${category}`)
             .then(response => response.json())
-            .then(data => setApiData(data))
+            .then(data => setItems(data))
             .catch(error => console.error('Error fetching data:', error));
-    }, []);
-
-    const handleAddToCart = (item) => {
-        setCartItems(prevItems => [...prevItems, item]);
-    };
-
-    const handleCustomizeClick = (item) => {
-        setSelectedItem(item);
-        setShowCustomPopup(true);
-    };
-
-    const closeCustomPopup = () => {
-        setShowCustomPopup(false);
-        setSelectedItem(null);
-    };
-
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    }, [location, category]);
 
     return (
-        <div className="home-container">
-            <Nav className="nav" />
-            <br/>
-            <h2>Pizza</h2>
+        <div>
+            <Nav />
+            <h2>{category} Category</h2>
             <div className="card-container">
-                {apiData.map(item => (
-                    <div key={item.id} className="card">
-                        <img src={item.thumbnailUrl} alt={item.title} />
-                        <h3>{item.title}</h3>
-                        <button className="card-button" onClick={() => handleAddToCart(item)}>Add to Cart</button>
-                        <button className="card-button" onClick={() => handleCustomizeClick(item)}>Customize</button>
+                {items.map((item, index) => (
+                    <div key={index} className="card">
+                        <img src={item.image} alt={item.name} />
+                        <h3>{item.name}</h3>
+                        <p>{item.description}</p>
+                        <p>Price: ${item.price}</p>
                     </div>
                 ))}
             </div>
-            <Footer scrollToTop={scrollToTop}/> 
-            {showCustomPopup && (
-                <CustomizationPopup
-                    item={selectedItem}
-                    onClose={closeCustomPopup}
-                    onAddToCart={handleAddToCart}
-                />
-            )}
+            <Footer />
         </div>
     );
 }

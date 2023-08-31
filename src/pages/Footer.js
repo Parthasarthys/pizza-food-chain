@@ -1,18 +1,40 @@
 import React from 'react';
-import './Footer.css'; // Import your custom CSS file
+import { Button, Link, styled } from '@mui/material'; // Import Button and Link from MUI
+
+// Define your custom styled components using MUI's styled function
+const FooterContainer = styled('footer')({
+  backgroundColor: 'black',
+  color: '#fff',
+  padding: '20px',
+  textAlign: 'center',
+  marginTop: 30,
+});
+
+const FooterLinks = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  marginBottom: '10px',
+});
+
+const ToTopButton = styled(Button)({
+  backgroundColor: '#f50057',
+  color: '#fff',
+});
 
 const Footer = ({ scrollToTop }) => {
-    return (
-        <footer className="footer">
-            <div className="footer-links">
-                <a href="#about">About</a>
-                <a href="#feedback">Feedback</a>
-            </div>
-            <button className="to-top-btn" onClick={scrollToTop}>
-                Go to Top
-            </button>
-        </footer>
-    );
-}
+  return (
+    <FooterContainer>
+      <FooterLinks>
+        <Link href="#about" color="inherit" underline="none" style={{ margin: '0 10px' }}>
+          About
+        </Link>
+        <Link href="#feedback" color="inherit" underline="none" style={{ margin: '0 10px' }}>
+          Feedback
+        </Link>
+      </FooterLinks>
+      <ToTopButton onClick={scrollToTop}>Go to Top</ToTopButton>
+    </FooterContainer>
+  );
+};
 
 export default Footer;

@@ -1,43 +1,49 @@
-
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+.menu-page {
+    background-color: grey;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 20px;
-    width: 100;
-    background-color: #dfe7ec;
-}
-
-.card {
+    margin: 20px auto; /* Add margin for spacing */
+    max-width: 1200px; /* Adjust the maximum width as needed */
+  }
+  
+  .card {
+    flex: 1;
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
     background-color: rgb(168, 58, 58);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.card:hover {
+    max-width: calc(33.33% - 20px); /* Three cards per row with gap */
+  }
+  
+  .card:hover {
     transform: translateY(-5px);
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
-}
-
-img {
+  }
+  
+  .card-image {
     max-width: 100%;
     height: auto;
-}
-
-h2 {
+  }
+  
+  h2 {
     margin-top: 10px;
     font-size: 1.5rem;
-}
-
-p {
+  }
+  
+  p {
     margin-top: 5px;
     font-size: 1rem;
     color: #555;
-}
-
-.view-all-button {
+  }
+  
+  .view-all-button {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 20px;
@@ -46,8 +52,9 @@ p {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease-in-out;
-}
-
-.view-all-button:hover {
+  }
+  
+  .view-all-button:hover {
     background-color: #0056b3;
-}
+  }
+  

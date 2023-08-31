@@ -1,63 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, IconButton, Button, Avatar, Menu, MenuItem } from '@mui/material';
+import { ShoppingCart, Menu as MenuIcon } from '@mui/icons-material';
 import LocationPopup from './LocationPopup'; // Import the LocationPopup component
 import './Nav.css';
 
 const Nav = () => {
-    const [show, handleShow] = useState(false);
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [selectedLocation, setSelectedLocation] = useState('');
-    const navigate = useNavigate();
+  const [show, handleShow] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const navigate = useNavigate();
 
+  const [userLoggedIn, setUserLoggedIn] = useState(false); // State to track user login status
+  const [anchorEl, setAnchorEl] = useState(null); // State for the dropdown menu anchor
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 100) {
-                handleShow(true);
-            } else {
-                handleShow(false);
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
-    const handleViewMenu = () => {
-        setIsPopupOpen(true);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        handleShow(true);
+      } else {
+        handleShow(false);
+      }
     };
 
-    const handlePopupClose = () => {
-        setIsPopupOpen(false);
-    };
+    // Check user login status from local storage and set isLoggedIn accordingly
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    setUserLoggedIn(isLoggedIn);
+    console.log(isLoggedIn);
+    window.addEventListener('scroll', handleScroll);
 
-    const handleLocationSelect = (location) => {
-        setSelectedLocation(location);
-        setIsPopupOpen(false);
-        // Navigate to the menu page with the selected location as a query parameter
-        navigate(`/home/menu?location=${location}`);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
+  }, []);
 
-    return (
-        <div className={`nav ${show && "nav_black"}`}>
+  const handleViewMenu = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+  };
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location);
+    setIsPopupOpen(false);
+    // Navigate to the menu page with the selected location as a query parameter
+    navigate(`/home/menu?location=${location}`);
+  };
+
+  const handleAvatarClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSignOut = () => {
+    // Remove login status from local storage and update state
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('id');
+    setUserLoggedIn(false);
+    handleMenuClose();
+  };
+
+  return (
+    <AppBar position="fixed" color="default" >
+      <Toolbar>
+        <IconButton onClick={handleViewMenu} edge="start" color="black" aria-label="menu">
+          <MenuIcon />
+        </IconButton>
+
+        <div style={{ flexGrow: 200 }} /> {/* Spacer to push content to the right */}
+        
+        {userLoggedIn ? (
+          <>
+            <IconButton edge="end" color="inherit">
+              <ShoppingCart />
+            </IconButton>
+
+            <IconButton onClick={handleAvatarClick} edge="end" color="inherit">
+              <Avatar>S</Avatar>
+            </IconButton>
+
+            <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
+              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
             
-            <img src="data:image/jpeg;base64,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" alt="navbar-logo" height="50" width="50"/>
-            <button className="menu-button" onClick={handleViewMenu}>
-                Menu
-            </button>
+            </Menu>
+          </>
+        ) : (
+          <Link to="/login">
+            <Button color="inherit">Login</Button>
+          </Link>
+        )}
 
-            <Link to="/login">
-                <button className="logout-button">Login</button>
-            </Link>
-
-            {isPopupOpen && (
-                <LocationPopup onClose={handlePopupClose} onLocationSelect={handleLocationSelect} />
-            )}
-        </div>
-    );
-}
+        {isPopupOpen && <LocationPopup onClose={handlePopupClose} onLocationSelect={handleLocationSelect} />}
+      </Toolbar>
+    </AppBar>
+  );
+};
 
 export default Nav;

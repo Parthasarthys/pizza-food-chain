@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation,Navigate } from 'react-router-dom';
 import './Sideorders.css'; // Make sure to import your CSS file
 import Nav from './Nav';
 import Footer from './Footer';
@@ -15,7 +15,7 @@ function SideOrders() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `https://de62-103-93-20-138.ngrok-free.app/customer/menu/by-location/products?location=${selectedLocation}`;
+        const url = `https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
         const response = await fetch(url, {
           method: "get",
           headers: new Headers({
@@ -26,7 +26,7 @@ function SideOrders() {
         if (response.ok) {
           const data = await response.json();
           if (Array.isArray(data)) {
-            setItems(data.filter(item => item.type === 'appetizers')); // Filter for appetizers type
+            setItems(data.filter(item => item.type === 'appetizers').map(item => ({ ...item, quantity: 1 }))); // Filter for appetizers type
           } else {
             console.log("No items found in the data");
           }
@@ -52,16 +52,76 @@ function SideOrders() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const handleQuantityChange = (item, newQuantity) => {
-    const updatedItems = items.map(i => {
-      if (i.id === item.id) {
-        return { ...i, quantity: newQuantity };
+  const addToCart = async (productId) => {
+    try {
+      // Get the stored id from local storage
+      const storedId = localStorage.getItem('id');
+      // Find the selected item based on productId
+      const selectedItem = items.find(item => item.id === productId);
+  
+      // Check if all selections are made
+      if (
+        selectedItem &&
+        selectedItem.selectedSizeId
+      ) {
+      
+        console.log(storedId);
+        console.log(selectedItem.id);
+        console.log(selectedItem.selectedSizeId);
+        console.log(selectedItem.quantity);
+  
+        const url = 'https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/cartitems/cart/add'; // Replace with your backend URL
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            "ngrok-skip-browser-warning": "69420",
+          },
+          body: JSON.stringify({
+            user: { id: storedId },
+            product: { id: selectedItem.id },
+            crust: { id: null },
+            size: { id: selectedItem.selectedSizeId },
+            toppings: [{id: null}],
+            quantity: selectedItem.quantity
+          }),
+        });
+  
+        if (response.ok) {
+          console.log('Item added to cart successfully');
+          // Navigate to the cart page
+          Navigate("/cart");
+        } else {
+          console.error('Error adding item to cart:', response.status);
+        }
+      } else {
+        console.log('Please select all options before adding to cart.');
       }
-      return i;
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
+  };
+    
+  const handleSizeSelect = (itemId, setId) => {
+    const updatedItems = items.map(item => {
+      if (item.id === itemId) {
+        return { ...item, selectedSizeId: setId };
+      }
+      return item;
     });
     setItems(updatedItems);
   };
 
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    const updatedItems = items.map(item => {
+      if (item.id === itemId) {
+        return { ...item, quantity: Math.max(newQuantity, 1) };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
 
   return (
     <div>
@@ -94,13 +154,19 @@ function SideOrders() {
             <h3>{item.name}</h3>
             <p>{item.description}</p>
             <p>Price: Rs.{item.price.toFixed(2)}</p>
-            <Size selectedLocation={selectedLocation} />
+            <Size
+              selectedLocation={selectedLocation}
+              selectedSizeId={item.selectedSizeId}
+              onSizeSelect={setId => handleSizeSelect(item.id, setId)}
+            />
             <div className="quantity-container">
-              <button onClick={() => handleQuantityChange(item, (item.quantity || 1) - 1)}>-</button>
-              <span>{item.quantity || 1}</span>
-              <button onClick={() => handleQuantityChange(item, (item.quantity || 1) + 1)}>+</button>
+              <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
+              <span>{item.quantity}</span>
+              <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>+</button>
             </div>
-            <button className="add-to-cart-button">Add to Cart</button>
+            <button className="add-to-cart-button" onClick={() => addToCart(item.id)}>
+                       Add to Cart
+             </button>
           </div>
         ))}
       </div>

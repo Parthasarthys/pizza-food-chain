@@ -8,7 +8,7 @@ import './Menu.css';
   import pizzaImage from './images/pizza.jfif';
   import sidesImage from './images/sidedishes.jfif';
   import beveragesImage from './images/beverages.jfif';
-  
+
   const Menu = () => {
     const categories = [
       { title: 'Pizza', description: 'Delicious pizza options', link: 'pizza', image: pizzaImage },

@@ -13,7 +13,7 @@ const MyCarousel = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `https://ce6d-103-93-20-138.ngrok-free.app/api/coupons`;
+        const url = `https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/coupons`;
         const response = await fetch(url, {
           method: 'get',
           headers: new Headers({

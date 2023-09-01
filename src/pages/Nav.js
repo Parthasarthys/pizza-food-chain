@@ -60,7 +60,6 @@ const Nav = () => {
   const handleSignOut = () => {
     // Remove login status from local storage and update state
     localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('id');
     setUserLoggedIn(false);
     handleMenuClose();
   };

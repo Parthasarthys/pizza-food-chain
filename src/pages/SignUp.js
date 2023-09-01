@@ -14,7 +14,7 @@ const SignUp = () => {
 // Inside the onSubmit function
 const sendUserDataToBackend = async (uid, userEmail) => {
     try {
-      const url = 'https://ce6d-103-93-20-138.ngrok-free.app/api/users/signup'; // Replace with your backend URL
+      const url = 'https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/users/signup'; // Replace with your backend URL
       const response = await fetch(url, {
         method: 'POST',
         headers: {

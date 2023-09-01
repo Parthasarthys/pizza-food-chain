@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import {  useLocation, useNavigate} from 'react-router-dom';
 import './Pizza.css';
 import Nav from './Nav';
 import Footer from './Footer';
@@ -11,7 +11,8 @@ import axios from 'axios';
 function Pizza() {
   const location = useLocation();
   const selectedLocation = location.state && location.state.selectedLocation;
-
+  const navigate =  useNavigate();
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [items, setItems] = useState([]);
   const [displayedItems, setDisplayedItems] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('vegetarian'); // Default to vegetarian
@@ -20,15 +21,17 @@ function Pizza() {
   const [selectedCrustId, setSelectedCrustId] = useState(null);
   const [selectedSizeId, setSelectedSizeId] = useState(null);
   const [quantity, setQuantity] = useState(1);
+//   const token = localStorage.getItem('tokenId')
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `https://ce6d-103-93-20-138.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
+        const url = `https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
         const response = await fetch(url, {
           method: "get",
           headers: new Headers({
             "ngrok-skip-browser-warning": "69420",
+            
           }),
         });
 
@@ -65,9 +68,14 @@ function Pizza() {
 
   const addToCart = async (productId) => {
     try {
-      // Get the stored id from local storage
-      const storedId = localStorage.getItem('id');
-  
+        // Check if the user is logged in
+        const storedId = localStorage.getItem('id');
+        const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        if (!userLoggedIn) {
+          navigate('/login'); // Redirect to login page if not logged in
+          return;
+        }                                       
       // Find the selected item based on productId
       const selectedItem = items.find(item => item.id === productId);
   
@@ -93,7 +101,7 @@ function Pizza() {
         console.log(selectedItem.selectedToppingsId);
         console.log(selectedItem.quantity);
   
-        const url = 'https://ce6d-103-93-20-138.ngrok-free.app/api/cartitems/cart/add'; // Replace with your backend URL
+        const url = 'https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/cartitems/cart/add'; // Replace with your backend URL
         const response = await fetch(url, {
           method: 'POST',
           headers: {
@@ -113,7 +121,7 @@ function Pizza() {
         if (response.ok) {
           console.log('Item added to cart successfully');
           // Navigate to the cart page
-          Navigate("/cart");
+          navigate("/cart");
         } else {
           console.error('Error adding item to cart:', response.status);
         }
@@ -211,8 +219,8 @@ function Pizza() {
             </div>
 
             <button className="add-to-cart-button" onClick={() => addToCart(item.id)}>
-                       Add to Cart
-             </button>
+            {userLoggedIn ? 'Add to Cart' : 'Login to Add'}
+          </button>
           </div>
         ))}
       </div>

@@ -14,7 +14,7 @@ function Beverages() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `https://de62-103-93-20-138.ngrok-free.app/customer/menu/by-location/products?location=${selectedLocation}`;
+        const url = `https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
         const response = await fetch(url, {
           method: "get",
           headers: new Headers({

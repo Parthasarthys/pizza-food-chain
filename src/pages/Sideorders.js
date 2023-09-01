@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation,Navigate } from 'react-router-dom';
+import { useLocation,useNavigate } from 'react-router-dom';
 import './Sideorders.css'; // Make sure to import your CSS file
 import Nav from './Nav';
 import Footer from './Footer';
@@ -7,7 +7,7 @@ import Size from './Size';
 function SideOrders() {
   const location = useLocation();
   const selectedLocation = location.state && location.state.selectedLocation;
-
+  const navigate =  useNavigate();
   const [items, setItems] = useState([]);
   const [displayedItems, setDisplayedItems] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState('Breads'); // Default to breads
@@ -15,7 +15,7 @@ function SideOrders() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
+        const url = `https://6657-103-93-20-138.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
         const response = await fetch(url, {
           method: "get",
           headers: new Headers({
@@ -56,6 +56,12 @@ function SideOrders() {
     try {
       // Get the stored id from local storage
       const storedId = localStorage.getItem('id');
+      const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+      if (!userLoggedIn) {
+        navigate('/login'); // Redirect to login page if not logged in
+        return;
+      } 
       // Find the selected item based on productId
       const selectedItem = items.find(item => item.id === productId);
   
@@ -70,7 +76,7 @@ function SideOrders() {
         console.log(selectedItem.selectedSizeId);
         console.log(selectedItem.quantity);
   
-        const url = 'https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/cartitems/cart/add'; // Replace with your backend URL
+        const url = 'https://6657-103-93-20-138.ngrok-free.app/api/cartitems/cart/add'; // Replace with your backend URL
         const response = await fetch(url, {
           method: 'POST',
           headers: {
@@ -80,9 +86,7 @@ function SideOrders() {
           body: JSON.stringify({
             user: { id: storedId },
             product: { id: selectedItem.id },
-            crust: { id: null },
             size: { id: selectedItem.selectedSizeId },
-            toppings: [{id: null}],
             quantity: selectedItem.quantity
           }),
         });
@@ -90,7 +94,7 @@ function SideOrders() {
         if (response.ok) {
           console.log('Item added to cart successfully');
           // Navigate to the cart page
-          Navigate("/cart");
+          navigate("/cart");
         } else {
           console.error('Error adding item to cart:', response.status);
         }

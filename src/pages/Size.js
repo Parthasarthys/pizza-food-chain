@@ -6,7 +6,7 @@ function Size({ selectedLocation, selectedSizeId, onSizeSelect }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/menu/by-location?location=${selectedLocation}`;
+        const url = `https://6657-103-93-20-138.ngrok-free.app/api/menu/by-location?location=${selectedLocation}`;
         const response = await fetch(url, {
           method: "get",
           headers: new Headers({

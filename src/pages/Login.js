@@ -24,7 +24,7 @@ const Login = () => {
       const role = email === 'sankarshan@gmail.com' ? 'OWNER' : 'CUSTOMER';
 
       // Send data to backend
-      const url = 'https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/users/signin'; // Replace with your backend URL
+      const url = 'https://6657-103-93-20-138.ngrok-free.app/api/users/signin'; // Replace with your backend URL
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -36,6 +36,9 @@ const Login = () => {
       });
 
       if (response.ok) {
+        const responseData = await response.json();
+        localStorage.setItem('id', responseData.id);
+        console.log('id:', responseData.id);
         setUserLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
         navigate("/home");

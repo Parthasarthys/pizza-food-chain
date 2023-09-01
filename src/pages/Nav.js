@@ -11,8 +11,8 @@ const Nav = () => {
   const [selectedLocation, setSelectedLocation] = useState('');
   const navigate = useNavigate();
 
-  const [userLoggedIn, setUserLoggedIn] = useState(false); // State to track user login status
-  const [anchorEl, setAnchorEl] = useState(null); // State for the dropdown menu anchor
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,10 +23,9 @@ const Nav = () => {
       }
     };
 
-    // Check user login status from local storage and set isLoggedIn accordingly
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setUserLoggedIn(isLoggedIn);
-    console.log(isLoggedIn);
+
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -45,8 +44,12 @@ const Nav = () => {
   const handleLocationSelect = (location) => {
     setSelectedLocation(location);
     setIsPopupOpen(false);
-    // Navigate to the menu page with the selected location as a query parameter
     navigate(`/home/menu?location=${location}`);
+  };
+
+  const handleCartClick = () => {
+    // Navigate to the cart page
+    navigate('/cart');
   };
 
   const handleAvatarClick = (event) => {
@@ -58,34 +61,36 @@ const Nav = () => {
   };
 
   const handleSignOut = () => {
-    // Remove login status from local storage and update state
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('id');
     setUserLoggedIn(false);
     handleMenuClose();
   };
 
+  // Get the first letter of the email for the Avatar
+  const userInitial = userLoggedIn ? localStorage.getItem('email')[0].toUpperCase() : '';
+
   return (
-    <AppBar position="fixed" color="default" >
+    <AppBar position="fixed" color="default">
       <Toolbar>
         <IconButton onClick={handleViewMenu} edge="start" color="black" aria-label="menu">
           <MenuIcon />
         </IconButton>
 
-        <div style={{ flexGrow: 200 }} /> {/* Spacer to push content to the right */}
-        
+        <div style={{ flexGrow: 200 }} />
+
         {userLoggedIn ? (
           <>
-            <IconButton edge="end" color="inherit">
+            <IconButton onClick={handleCartClick} edge="end" color="inherit">
               <ShoppingCart />
             </IconButton>
 
             <IconButton onClick={handleAvatarClick} edge="end" color="inherit">
-              <Avatar>S</Avatar>
+              <Avatar>{userInitial}</Avatar>
             </IconButton>
 
             <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleMenuClose}>
               <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
-            
             </Menu>
           </>
         ) : (

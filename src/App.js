@@ -9,7 +9,7 @@ import SignUp from './pages/SignUp';
 import Sideorders from './pages/Sideorders';
 import MenuManagementPage from './pages/MenuManagementPage';
 import Beverages from './pages/Beverages';
-import CategoryPage from './pages/CategoryPage';
+import Cart from './pages/Cart';
 const App = () => {
     return (
         <Router>
@@ -23,6 +23,7 @@ const App = () => {
         <Route path="/menu/sides" element={<Sideorders/>} />
         <Route path="/menu/beverages" element={<Beverages/>} />
         <Route path="/home/management" element={<MenuManagementPage/>}/>
+        <Route path="/cart" element={<Cart/>}/>
 
             </Routes>
         </Router>

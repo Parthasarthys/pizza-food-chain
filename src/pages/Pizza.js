@@ -26,7 +26,7 @@ function Pizza() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
+        const url = `https://6657-103-93-20-138.ngrok-free.app/api/menu/by-location/products?location=${selectedLocation}`;
         const response = await fetch(url, {
           method: "get",
           headers: new Headers({
@@ -101,7 +101,7 @@ function Pizza() {
         console.log(selectedItem.selectedToppingsId);
         console.log(selectedItem.quantity);
   
-        const url = 'https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/cartitems/cart/add'; // Replace with your backend URL
+        const url = 'https://6657-103-93-20-138.ngrok-free.app/api/cartitems/cart/add'; // Replace with your backend URL
         const response = await fetch(url, {
           method: 'POST',
           headers: {
@@ -219,7 +219,7 @@ function Pizza() {
             </div>
 
             <button className="add-to-cart-button" onClick={() => addToCart(item.id)}>
-            {userLoggedIn ? 'Add to Cart' : 'Login to Add'}
+               Add to cart 
           </button>
           </div>
         ))}

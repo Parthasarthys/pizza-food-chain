@@ -14,7 +14,7 @@ const SignUp = () => {
 // Inside the onSubmit function
 const sendUserDataToBackend = async (uid, userEmail) => {
     try {
-      const url = 'https://f8a2-2401-4900-1f27-37-4c1c-1230-eeec-3ba4.ngrok-free.app/api/users/signup'; // Replace with your backend URL
+      const url = 'https://6657-103-93-20-138.ngrok-free.app/api/users/signup'; // Replace with your backend URL
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -25,9 +25,7 @@ const sendUserDataToBackend = async (uid, userEmail) => {
       });
   
       if (response.ok) {
-        const responseData = await response.json();
-        localStorage.setItem('id', responseData.id);
-        console.log('id:', responseData.id);
+
         console.log('User data sent to backend successfully');
       } else {
         console.error('Error sending user data to backend:', response.status);

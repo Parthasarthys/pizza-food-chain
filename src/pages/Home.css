@@ -1,0 +1,53 @@
+/* Home Page CSS */
+.home-container {
+   margin-bottom: 20px;
+}
+
+.image-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    margin-top: 80px;
+    max-width: 2000px;
+    
+}
+
+.image-section img {
+    max-width: 600%;
+    height: auto;
+}
+
+.image-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.image-info h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.image-info p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.manual-content {
+    padding: 40px 0;
+}
+
+.manual-content h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.manual-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+ .carousel {
+    margin-top: 60px;
+ }
+/* ... (other CSS rules for your Nav and Footer components) ... */

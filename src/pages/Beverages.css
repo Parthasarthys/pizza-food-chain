@@ -1,0 +1,65 @@
+/* Style for the title */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+  }
+  
+  /* Center-align the beverages cards and create a grid layout with 3 cards per row */
+  .beverages-card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 0 20px; /* Add padding to the sides */
+    margin: 0 auto; /* Center-align the container */
+    max-width: 1200px; /* Set a maximum width for the container */
+  }
+  
+  /* Style for each beverages card */
+  .beverages-card {
+    width: 100%;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+  }
+  
+  /* Style for the beverages card image */
+  .beverages-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the beverages card content */
+  .beverages-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  /* Style for the Add to Cart button */
+  .beverages-card p {
+    margin: 5px 0;
+  }
+  
+  /* Active style for the title */
+  h3.category-title.active {
+    border-bottom-color: #007bff; /* Change this color to your desired active color */
+  }
+  
+  /* Style for the Add to Cart button */
+.add-to-cart-button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #0056b3;
+  }
+  
